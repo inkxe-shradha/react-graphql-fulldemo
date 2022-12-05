@@ -1,0 +1,12 @@
+{
+  "name": "mindtree-graph-auth",
+  "version": "1.0.0",
+  "description": "This is the basic react/graphql authtication project",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "cros": "^1.0.1",
+    "express": "^4.18.2",
+    "graphql": "^16.6.0"
+  }
+}
