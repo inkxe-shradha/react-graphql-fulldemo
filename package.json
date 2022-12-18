@@ -21,7 +21,7 @@
   "scripts": {
     "server": "nodemon server/server.js",
     "start": "node server/server.js",
-    "client": "npm run --prefix client",
+    "client": "npm run --prefix client start",
     "dev": "run-p server client"
   },
   "nodemonConfig": {
