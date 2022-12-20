@@ -2,7 +2,7 @@
   "name": "inkxeshradha-graph-auth",
   "version": "1.0.0",
   "description": "This is the basic react/graphql authtication project",
-  "main": "index.js",
+  "main": "server/server.js",
   "license": "MIT",
   "dependencies": {
     "@apollo/server": "^4.2.2",
@@ -13,6 +13,7 @@
     "dotenv": "8.2.0",
     "express": "^4.18.2",
     "graphql": "^16.6.0",
+    "graphql-request": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
     "moongose": "^1.0.0",
     "validator": "^13.7.0"

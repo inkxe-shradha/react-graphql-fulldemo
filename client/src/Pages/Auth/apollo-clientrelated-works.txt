@@ -1,0 +1,15 @@
+import { useMutation } from "@apollo/client";
+
+  const [search, setSearch] = useSearchParams();
+
+loginToMe({
+      variables: {
+        fields: {
+          ...data,
+        },
+      },
+    }).then(({ data }) => {
+      const token = data.singIn.token;
+      const email = data.singIn.email;
+      toast.success("Login successful!.");
+    });
