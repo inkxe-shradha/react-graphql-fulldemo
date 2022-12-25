@@ -4,9 +4,10 @@ import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   getLoadingState,
-  signInUser,
   handelUserError,
+  resetError,
 } from "../../store/slices/userSlice";
+import { signInUser, signUpUser } from "../../store/slices/userThunk";
 import "./index.css";
 import LoginForm from "./LogInForm";
 import LogOnForm from "./LogOnForm";
@@ -15,12 +16,23 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const error = useSelector(handelUserError);
   const [search, setSearch] = useSearchParams();
+  React.useEffect(() => {
+    dispatch(resetError());
+  }, []);
   const onSubmitHandler = (data, type) => {
-    dispatch(signInUser(data)).then((res) => {
-      if (!res.error?.message) {
-        toast.success("Login successful!");
-      }
-    });
+    if (type === "login") {
+      dispatch(signInUser(data)).then((res) => {
+        if (!res.error?.message) {
+          toast.success("Login successful!");
+        }
+      });
+    } else {
+      dispatch(signUpUser(data)).then((res) => {
+        if (!res.error?.message) {
+          toast.success("Sign up successful!");
+        }
+      });
+    }
   };
   return (
     <div className="wrapper fadeInDown">
@@ -41,7 +53,11 @@ const SignIn = () => {
             error={error}
           />
         ) : (
-          <LogOnForm />
+          <LogOnForm
+            onSubmitHandler={onSubmitHandler}
+            loading={loading}
+            error={error}
+          />
         )}
         <div id="formFooter">
           <a

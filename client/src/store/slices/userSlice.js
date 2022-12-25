@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { signInUserAPI } from "../../Api";
+import { createSlice } from "@reduxjs/toolkit";
+import { signInUser, signUpUser } from "./userThunk";
 
 const initialState = {
   token: "",
@@ -9,23 +9,16 @@ const initialState = {
   error: "",
 };
 
-export const signInUser = createAsyncThunk(
-  "user/signInUser",
-  async (formData) => {
-    try {
-      const { singIn } = await signInUserAPI(formData);
-      return singIn;
-    } catch (error) {
-      throw error.message;
-    }
-  }
-);
-
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    resetError: (state) => {
+      state.error = "";
+    },
+  },
   extraReducers: (builder) => {
+    // User Sign In
     builder.addCase(signInUser.pending, (state, { payload }) => {
       state.status = "loading";
       state.error = "";
@@ -38,6 +31,20 @@ const userSlice = createSlice({
       state.status = "ideal";
       state.error = error.message.split(":")[0];
     });
+
+    // User Sign up
+    builder.addCase(signUpUser.pending, (state, { payload }) => {
+      state.status = "loading";
+      state.error = "";
+    });
+    builder.addCase(signUpUser.fulfilled, (state, { payload }) => {
+      state.status = "ideal";
+      state.error = "";
+    });
+    builder.addCase(signUpUser.rejected, (state, { error }) => {
+      state.status = "ideal";
+      state.error = error.message.split(":")[0];
+    });
   },
 });
 
@@ -45,6 +52,8 @@ export const getUserDetails = (state) => ({
   id: state.User.id,
   email: state.User.email,
 });
+
+export const { resetError } = userSlice.actions;
 
 export const getLoadingState = (state) => state.user.status;
 export const getUserToken = (state) => state.user.token;
