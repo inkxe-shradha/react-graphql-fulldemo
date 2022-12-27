@@ -11,10 +11,10 @@ function App() {
     <Provider store={store}>
       <AuthProvider>
         <Header isHide={false} />
+        <main className="container mt-4">
+          <Outlet />
+        </main>
       </AuthProvider>
-      <main className="container mt-4">
-        <Outlet />
-      </main>
       <ToastContainer
         position="top-right"
         newestOnTop

@@ -55,7 +55,6 @@ export const query = {
       throw error;
     }
   },
-
   posts: async (parent, { sort, query }, context, info) => {
     try {
       let queryBy = {};

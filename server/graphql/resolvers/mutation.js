@@ -159,7 +159,7 @@ export const mutation = {
 
       return result;
     } catch (error) {
-      throw err;
+      throw error;
     }
   },
 

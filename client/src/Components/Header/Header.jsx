@@ -1,10 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import { logOutUser } from "../../store/slices/userSlice";
 import "./Header.css";
 const Header = ({ isHide }) => {
-  const { user } = useAuth();
+  const { user, validateUser, logout } = useAuth();
+  const dispatch = useDispatch();
   React.useEffect(() => {
+    validateUser();
     if (user) {
       document.querySelectorAll(".dropdown-toggle").forEach((item) => {
         item.addEventListener("click", (event) => {
@@ -18,7 +22,12 @@ const Header = ({ isHide }) => {
         });
       });
     }
-  });
+  }, [user, validateUser]);
+  const logOut = () => {
+    dispatch(logOutUser());
+    logout();
+  };
+
   return !isHide ? (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -44,8 +53,13 @@ const Header = ({ isHide }) => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink to="/article" className="nav-link">
+              <NavLink to="/library" className="nav-link">
                 Article
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/library/create" className="nav-link">
+                Create Article
               </NavLink>
             </li>
           </ul>
@@ -64,7 +78,7 @@ const Header = ({ isHide }) => {
                 </li>
               </>
             ) : (
-              <li className="nav-item dropdown d-none">
+              <li className="nav-item dropdown ">
                 <a
                   className="nav-link dropdown-toggle"
                   href="!#"
@@ -77,20 +91,20 @@ const Header = ({ isHide }) => {
                 </a>
                 <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li>
-                    <a className="dropdown-item" href="!#">
+                    <Link className="dropdown-item" to="profile">
                       <i className="fas fa-sliders-h fa-fw"></i> Account
-                    </a>
+                    </Link>
                   </li>
                   <li>
-                    <a className="dropdown-item" href="!#">
+                    <Link className="dropdown-item" to="/profile/settings">
                       <i className="fas fa-cog fa-fw"></i> Settings
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <hr className="dropdown-divider" />
                   </li>
                   <li>
-                    <a className="dropdown-item" href="!#">
+                    <a className="dropdown-item" href="/#" onClick={logOut}>
                       <i className="fas fa-sign-out-alt fa-fw"></i> Log Out
                     </a>
                   </li>

@@ -19,3 +19,21 @@ export const signUpUserMutation = gql`
     }
   }
 `;
+
+export const updateUserCreditMutation = gql`
+  mutation UpdateUserCred(
+    $email: String!
+    $password: String!
+    $updateUserCreditId: ID!
+  ) {
+    updateUserCredit(
+      email: $email
+      password: $password
+      id: $updateUserCreditId
+    ) {
+      email
+      id
+      token
+    }
+  }
+`;

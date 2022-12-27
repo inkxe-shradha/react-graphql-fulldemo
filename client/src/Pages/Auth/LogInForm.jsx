@@ -15,6 +15,7 @@ const LoginForm = ({ onSubmitHandler, loading, error }) => {
     validationSchema: signInSchema,
     onSubmit: (values) => {
       onSubmitHandler(values, "login");
+      formik.resetForm();
     },
   });
 

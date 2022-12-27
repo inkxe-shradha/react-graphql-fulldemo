@@ -30,9 +30,9 @@ app.use(
   bodyParser.json(),
   expressMiddleware(server, {
     context: async ({ req }) => {
-      req.headers.authorization =
-        "Bearer " +
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWViMzNlODQxMTc3N2I1OTAxMDY2ZSIsImVtYWlsIjoic2hyYWRoYXN1bWFuMjBAZ21haWwuY29tIiwiaWF0IjoxNjcxMzQ0OTcxLCJleHAiOjE2NzE5NDk3NzF9.L97QqzNf3FzMxMFLGBpRw31TSm0gPSKbIt0WL-Y2dYI";
+      // req.headers.authorization =
+      //   "Bearer " +
+      //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzOWViMzNlODQxMTc3N2I1OTAxMDY2ZSIsImVtYWlsIjoic2hyYWRoYXN1bWFuMjBAZ21haWwuY29tIiwiaWF0IjoxNjcxNTQ0NzQ2LCJleHAiOjE2NzIxNDk1NDZ9.pMpugN_ioqw81gmVmKI-PMP728BKr3WAwDzHykfLiFg";
       return req;
     },
   })
